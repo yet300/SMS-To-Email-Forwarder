@@ -1,6 +1,9 @@
 package com.yet.forwarder.email
 
 import com.yet.forwarder.data.ForwarderSettings
+import jakarta.inject.Inject
+import jakarta.inject.Singleton
+import org.koin.core.annotation.Single
 import java.util.Properties
 import javax.mail.Authenticator
 import javax.mail.Message
@@ -12,7 +15,9 @@ import javax.mail.internet.MimeMessage
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class EmailSender {
+@Singleton
+@Single
+class EmailSender @Inject constructor() {
 
     suspend fun sendEmail(settings: ForwarderSettings, subject: String, body: String) {
         withContext(Dispatchers.IO) {

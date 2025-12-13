@@ -2,15 +2,13 @@ package com.yet.forwarder.ui
 
 import android.app.Application
 import android.util.Patterns
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.lifecycle.viewmodel.initializer
-import androidx.lifecycle.viewmodel.viewModelFactory
 import com.yet.forwarder.R
 import com.yet.forwarder.data.ForwarderSettings
 import com.yet.forwarder.data.SettingsStore
 import com.yet.forwarder.email.EmailSender
+import jakarta.inject.Inject
 import java.util.Locale
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -18,12 +16,14 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import org.koin.android.annotation.KoinViewModel
 
-class ForwarderViewModel(application: Application) : AndroidViewModel(application) {
-
-    private val app = getApplication<Application>()
-    private val settingsStore = SettingsStore(application)
-    private val emailSender = EmailSender()
+@KoinViewModel
+class ForwarderViewModel @Inject constructor(
+    private val app: Application,
+    private val settingsStore: SettingsStore,
+    private val emailSender: EmailSender
+) : ViewModel() {
 
     private val _uiState = MutableStateFlow(ForwarderUiState())
     val uiState: StateFlow<ForwarderUiState> = _uiState.asStateFlow()
@@ -164,15 +164,6 @@ class ForwarderViewModel(application: Application) : AndroidViewModel(applicatio
             trustAllCertificates = state.trustAllCertificates,
             monitoringEnabled = state.monitoringEnabled
         )
-    }
-
-    companion object {
-        val Factory: ViewModelProvider.Factory = viewModelFactory {
-            initializer {
-                val application = checkNotNull(this[ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY])
-                ForwarderViewModel(application)
-            }
-        }
     }
 }
 

@@ -18,12 +18,11 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.viewmodel.compose.viewModel
-import com.yet.forwarder.R
 import com.yet.forwarder.ui.ForwarderScreen
 import com.yet.forwarder.ui.ForwarderViewModel
 import com.yet.forwarder.ui.theme.SMSToEmailForwarderTheme
 import kotlinx.coroutines.launch
+import org.koin.androidx.compose.koinViewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,7 +30,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             SMSToEmailForwarderTheme {
-                val viewModel: ForwarderViewModel = viewModel(factory = ForwarderViewModel.Factory)
+                val viewModel: ForwarderViewModel = koinViewModel()
                 val state by viewModel.uiState.collectAsState()
 
                 val snackbarHostState = remember { SnackbarHostState() }

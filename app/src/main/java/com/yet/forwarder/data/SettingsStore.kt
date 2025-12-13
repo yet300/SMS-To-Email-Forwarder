@@ -9,14 +9,19 @@ import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
+import jakarta.inject.Singleton
+import jakarta.inject.Inject
 import java.io.IOException
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
+import org.koin.core.annotation.Single
 
 val Context.forwarderDataStore: DataStore<Preferences> by preferencesDataStore(name = "forwarder_settings")
 
-class SettingsStore(private val context: Context) {
+@Singleton
+@Single
+class SettingsStore @Inject constructor(private val context: Context) {
 
     private val dataStore = context.forwarderDataStore
 

@@ -19,10 +19,13 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
-class SmsReceiver : BroadcastReceiver() {
+class SmsReceiver : BroadcastReceiver(), KoinComponent {
 
-    private val emailSender = EmailSender()
+    val settingsStore: SettingsStore by inject()
+    val emailSender: EmailSender by inject()
 
     override fun onReceive(context: Context, intent: Intent) {
         if (intent.action != Telephony.Sms.Intents.SMS_RECEIVED_ACTION) return
@@ -41,7 +44,7 @@ class SmsReceiver : BroadcastReceiver() {
 
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                val settings = SettingsStore(appContext).settings.first()
+                val settings = settingsStore.settings.first()
                 if (!settings.monitoringEnabled) {
                     Log.i(TAG, "Monitoring disabled. SMS ignored.")
                     return@launch
