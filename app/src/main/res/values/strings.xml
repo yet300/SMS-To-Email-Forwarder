@@ -45,4 +45,7 @@
     <string name="email_subject_test">Testing from Forwarder App</string>
     <string name="email_body_test">Testing Email!</string>
     <string name="email_subject_format">Date: %1$s From: %2$s</string>
+    <string name="notification_channel_name">Forwarder</string>
+    <string name="notification_forwarding_title">Пересылка SMS активна</string>
+    <string name="notification_forwarding_content">Отправлено писем: %1$d</string>
 </resources>

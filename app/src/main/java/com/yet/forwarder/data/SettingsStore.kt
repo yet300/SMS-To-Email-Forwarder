@@ -44,7 +44,8 @@ class SettingsStore @Inject constructor(private val context: Context) {
                 requireAuth = preferences[Keys.REQUIRE_AUTH] ?: false,
                 useSsl = preferences[Keys.USE_SSL] ?: false,
                 trustAllCertificates = preferences[Keys.TRUST_ALL_CERTIFICATES] ?: false,
-                monitoringEnabled = preferences[Keys.MONITORING_ENABLED] ?: false
+                monitoringEnabled = preferences[Keys.MONITORING_ENABLED] ?: false,
+                forwardedCount = preferences[Keys.FORWARDED_COUNT] ?: 0
             )
         }
 
@@ -60,6 +61,26 @@ class SettingsStore @Inject constructor(private val context: Context) {
             preferences[Keys.USE_SSL] = settings.useSsl
             preferences[Keys.TRUST_ALL_CERTIFICATES] = settings.trustAllCertificates
             preferences[Keys.MONITORING_ENABLED] = settings.monitoringEnabled
+            preferences[Keys.FORWARDED_COUNT] = settings.forwardedCount
+        }
+    }
+
+    suspend fun setMonitoring(enabled: Boolean) {
+        dataStore.edit { preferences ->
+            preferences[Keys.MONITORING_ENABLED] = enabled
+        }
+    }
+
+    suspend fun incrementForwardedCount() {
+        dataStore.edit { preferences ->
+            val current = preferences[Keys.FORWARDED_COUNT] ?: 0
+            preferences[Keys.FORWARDED_COUNT] = current + 1
+        }
+    }
+
+    suspend fun resetForwardedCount() {
+        dataStore.edit { preferences ->
+            preferences[Keys.FORWARDED_COUNT] = 0
         }
     }
 
@@ -74,5 +95,6 @@ class SettingsStore @Inject constructor(private val context: Context) {
         val USE_SSL = booleanPreferencesKey("use_ssl")
         val TRUST_ALL_CERTIFICATES = booleanPreferencesKey("trust_all_certificates")
         val MONITORING_ENABLED = booleanPreferencesKey("monitoring_enabled")
+        val FORWARDED_COUNT = intPreferencesKey("forwarded_count")
     }
 }

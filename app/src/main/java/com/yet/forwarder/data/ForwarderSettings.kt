@@ -10,5 +10,6 @@ data class ForwarderSettings(
     val requireAuth: Boolean = false,
     val useSsl: Boolean = false,
     val trustAllCertificates: Boolean = false,
-    val monitoringEnabled: Boolean = false
+    val monitoringEnabled: Boolean = false,
+    val forwardedCount: Int = 0
 )

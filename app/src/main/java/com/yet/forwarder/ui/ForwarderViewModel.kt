@@ -1,13 +1,19 @@
 package com.yet.forwarder.ui
 
 import android.app.Application
+import android.Manifest
+import android.content.pm.PackageManager
+import android.os.Build
+import android.util.Log
 import android.util.Patterns
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.core.content.ContextCompat
 import com.yet.forwarder.R
 import com.yet.forwarder.data.ForwarderSettings
 import com.yet.forwarder.data.SettingsStore
 import com.yet.forwarder.email.EmailSender
+import com.yet.forwarder.service.ForwarderService
 import jakarta.inject.Inject
 import java.util.Locale
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -111,12 +117,14 @@ class ForwarderViewModel @Inject constructor(
         val settings = parseSettings() ?: return
         viewModelScope.launch {
             settingsStore.save(settings.copy(monitoringEnabled = true))
+            settingsStore.resetForwardedCount()
             _uiState.update {
                 it.copy(
                     monitoringEnabled = true,
                     message = app.getString(R.string.msg_monitoring_started)
                 )
             }
+            startForwarderService()
         }
     }
 
@@ -132,6 +140,7 @@ class ForwarderViewModel @Inject constructor(
                     message = app.getString(R.string.msg_monitoring_stopped)
                 )
             }
+            stopForwarderService()
         }
     }
 
@@ -178,6 +187,37 @@ class ForwarderViewModel @Inject constructor(
             appendLine(throwable::class.java.name)
             appendLine(throwable.localizedMessage ?: app.getString(R.string.unknown_error))
             appendLine(throwable.stackTraceToString())
+        }
+    }
+
+    private fun hasForegroundPermission(): Boolean {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            ContextCompat.checkSelfPermission(
+                app,
+                Manifest.permission.FOREGROUND_SERVICE
+            ) == PackageManager.PERMISSION_GRANTED
+        } else {
+            true
+        }
+    }
+
+    private fun startForwarderService() {
+        if (!hasForegroundPermission()) {
+            Log.w("ForwarderViewModel", "Missing FOREGROUND_SERVICE permission, service not started")
+            return
+        }
+        runCatching {
+            ForwarderService.start(app)
+        }.onFailure {
+            Log.e("ForwarderViewModel", "Failed to start ForwarderService", it)
+        }
+    }
+
+    private fun stopForwarderService() {
+        runCatching {
+            ForwarderService.stop(app)
+        }.onFailure {
+            Log.e("ForwarderViewModel", "Failed to stop ForwarderService", it)
         }
     }
 }

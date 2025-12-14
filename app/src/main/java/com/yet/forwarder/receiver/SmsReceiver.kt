@@ -56,6 +56,7 @@ class SmsReceiver : BroadcastReceiver(), KoinComponent {
 
                 val subject = appContext.getString(R.string.email_subject_format, timestamp, sender)
                 emailSender.sendEmail(settings, subject, body)
+                settingsStore.incrementForwardedCount()
                 Handler(Looper.getMainLooper()).post {
                     Toast.makeText(appContext, appContext.getString(R.string.sms_forwarded_to_email), Toast.LENGTH_SHORT).show()
                 }
