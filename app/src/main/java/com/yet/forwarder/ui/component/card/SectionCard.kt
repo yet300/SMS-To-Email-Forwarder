@@ -11,17 +11,20 @@ import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 
 @Composable
 fun SectionCard(
     @StringRes titleRes: Int,
+    containerColor: Color = MaterialTheme.colorScheme.surface,
+    contentColor: Color = MaterialTheme.colorScheme.primary,
     content: @Composable ColumnScope.() -> Unit
 ) {
     OutlinedCard(
         colors = CardDefaults.outlinedCardColors(
-            containerColor = MaterialTheme.colorScheme.surface
+            containerColor = containerColor
         )
     ) {
         Column(
@@ -31,7 +34,7 @@ fun SectionCard(
             Text(
                 text = stringResource(titleRes),
                 style = MaterialTheme.typography.titleMedium,
-                color = MaterialTheme.colorScheme.primary
+                color = contentColor
             )
             content()
         }

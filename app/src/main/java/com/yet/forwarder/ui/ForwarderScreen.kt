@@ -138,6 +138,10 @@ fun ForwarderScreen(
             }
 
             item {
+                ThirdPartyWarningSection()
+            }
+
+            item {
                 ActionsSection(
                     state = state,
                     onSave = onSave,
@@ -173,7 +177,8 @@ private fun MonitoringStatus(monitoringEnabled: Boolean, hasSmsPermission: Boole
                 Text(stringResource(id = textRes))
             },
             leadingIcon = {
-                val icon = if (monitoringEnabled) Icons.Filled.CheckCircle else Icons.Filled.PauseCircle
+                val icon =
+                    if (monitoringEnabled) Icons.Filled.CheckCircle else Icons.Filled.PauseCircle
                 Icon(imageVector = icon, contentDescription = null)
             }
         )
@@ -278,6 +283,32 @@ private fun SecuritySection(
             checked = state.trustAllCertificates,
             onCheckedChange = onTrustAllCertificatesChange
         )
+    }
+}
+
+@Composable
+private fun ThirdPartyWarningSection() {
+    SectionCard(
+        titleRes = R.string.section_third_party_warning,
+        containerColor = MaterialTheme.colorScheme.error,
+        contentColor = MaterialTheme.colorScheme.onError
+    ) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Icon(
+                imageVector = Icons.Filled.Warning,
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.onError
+            )
+            Spacer(modifier = Modifier.width(12.dp))
+            Text(
+                text = stringResource(id = R.string.section_third_party_warning_description),
+                color = MaterialTheme.colorScheme.onError,
+                style = MaterialTheme.typography.bodyMedium
+            )
+        }
     }
 }
 

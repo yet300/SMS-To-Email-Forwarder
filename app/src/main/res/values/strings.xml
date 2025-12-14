@@ -13,6 +13,8 @@
     <string name="label_password">Пароль</string>
     <string name="label_receiver_email">Email получателя</string>
     <string name="section_security">Безопасность</string>
+    <string name="section_third_party_warning">Осторожно</string>
+    <string name="section_third_party_warning_description">Никогда не вводите свои данные, если это просит третье лицо. Ваши SMS и почта могут попасть к мошенникам.</string>
     <string name="title_starttls">STARTTLS</string>
     <string name="subtitle_starttls">Включить стартовое шифрование</string>
     <string name="title_auth">SMTP AUTH</string>
