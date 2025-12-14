@@ -29,6 +29,7 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.SnackbarResult
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -36,7 +37,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
@@ -65,9 +68,24 @@ fun ForwarderScreen(
     onStopMonitoring: () -> Unit,
     onMessageConsumed: () -> Unit
 ) {
+    val clipboardManager = LocalClipboardManager.current
+    val copyError = stringResource(id = R.string.btn_copy_error)
+    val copedError = stringResource(id = R.string.msg_error_copied)
+
     LaunchedEffect(state.message) {
         state.message?.let {
-            snackbarHostState.showSnackbar(it)
+            val result = if (state.lastError != null) {
+                snackbarHostState.showSnackbar(
+                    message = it,
+                    actionLabel = copyError
+                )
+            } else {
+                snackbarHostState.showSnackbar(it)
+            }
+            if (result == SnackbarResult.ActionPerformed && state.lastError != null) {
+                clipboardManager.setText(AnnotatedString(state.lastError))
+                snackbarHostState.showSnackbar(copedError)
+            }
             onMessageConsumed()
         }
     }

@@ -85,14 +85,21 @@ class ForwarderViewModel @Inject constructor(
                 val monitoring = _uiState.value.monitoringEnabled
                 settingsStore.save(settings.copy(monitoringEnabled = monitoring))
             }.onSuccess {
-                _uiState.update { state -> state.copy(message = app.getString(R.string.msg_test_sent)) }
+                _uiState.update { state ->
+                    state.copy(
+                        message = app.getString(R.string.msg_test_sent),
+                        lastError = null
+                    )
+                }
             }.onFailure { throwable ->
+                val detailed = formatError(throwable)
                 _uiState.update { state ->
                     state.copy(
                         message = app.getString(
                             R.string.msg_send_failed,
                             throwable.localizedMessage ?: app.getString(R.string.unknown_error)
-                        )
+                        ),
+                        lastError = detailed
                     )
                 }
             }
@@ -165,6 +172,14 @@ class ForwarderViewModel @Inject constructor(
             monitoringEnabled = state.monitoringEnabled
         )
     }
+
+    private fun formatError(throwable: Throwable): String {
+        return buildString {
+            appendLine(throwable::class.java.name)
+            appendLine(throwable.localizedMessage ?: app.getString(R.string.unknown_error))
+            appendLine(throwable.stackTraceToString())
+        }
+    }
 }
 
 data class ForwarderUiState(
@@ -181,5 +196,6 @@ data class ForwarderUiState(
     val passwordVisible: Boolean = false,
     val isSaving: Boolean = false,
     val isSendingTest: Boolean = false,
-    val message: String? = null
+    val message: String? = null,
+    val lastError: String? = null,
 )

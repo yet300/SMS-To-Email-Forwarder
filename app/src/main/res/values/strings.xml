@@ -30,6 +30,7 @@
     <string name="msg_test_sent">Тестовое письмо отправлено</string>
     <string name="msg_send_failed">Не удалось отправить письмо: %1$s</string>
     <string name="unknown_error">неизвестная ошибка</string>
+    <string name="msg_error_copied">Текст ошибки скопирован</string>
     <string name="error_smtp_required">Укажите SMTP сервер</string>
     <string name="error_port_invalid">Некорректный порт SMTP</string>
     <string name="error_username_required">Введите имя пользователя</string>
@@ -39,6 +40,8 @@
     <string name="msg_monitoring_stopped">Мониторинг остановлен</string>
     <string name="title_password_visibility_on">Показать пароль</string>
     <string name="title_password_visibility_off">Скрыть пароль</string>
+    <string name="label_last_error">Последняя ошибка</string>
+    <string name="btn_copy_error">Скопировать ошибку</string>
     <string name="email_subject_test">Testing from Forwarder App</string>
     <string name="email_body_test">Testing Email!</string>
     <string name="email_subject_format">Date: %1$s From: %2$s</string>
