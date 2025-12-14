@@ -1,0 +1,31 @@
+Categories:
+  - Communication
+  - Security
+License: Apache-2.0
+AuthorName: yet300
+AuthorEmail: ruslan00royale@proton.me
+WebSite: https://github.com/yet300/SMS-To-Email-Forwarder
+SourceCode: https://github.com/yet300/SMS-To-Email-Forwarder
+IssueTracker: https://github.com/yet300/SMS-To-Email-Forwarder/issues
+Changelog: https://github.com/yet300/SMS-To-Email-Forwarder/releases
+AutoName: SMS-To-Email Forwarder
+Summary: Forward incoming SMS to a configured email inbox
+Description: |-
+    SMS-To-Email Forwarder listens for incoming SMS messages and immediately
+    relays them to a configured SMTP account. It uses a persistent foreground
+    service with a status notification, Compose UI, Jetpack DataStore for
+    settings, and has no proprietary dependencies.
+RequiresRoot: false
+AntiFeatures:
+  - NonFreeNet
+Builds:
+  - versionName: 1.0.0
+    versionCode: 1
+    commit: v1.0.0
+    subdir: app
+    gradle:
+      - app:assembleRelease
+AutoUpdateMode: Version
+UpdateCheckMode: Tags
+CurrentVersion: 1.0.0
+CurrentVersionCode: 1
