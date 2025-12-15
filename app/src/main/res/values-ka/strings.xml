@@ -50,4 +50,7 @@
     <string name="notification_channel_name">Forwarder</string>
     <string name="notification_forwarding_title">SMS გადაგზავნა აქტიურია</string>
     <string name="notification_forwarding_content">გაგზავნილი წერილები: %1$d</string>
+    <string name="section_open_source">ღია კოდი</string>
+    <string name="open_source_description">პროექტის წყარო კოდი ხელმისაწვდომია GitHub-ზე Apache 2.0 ლიცენზიით.</string>
+    <string name="open_source_link_text">GitHub პროექტი</string>
 </resources>

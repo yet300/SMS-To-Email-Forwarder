@@ -50,4 +50,7 @@
     <string name="notification_channel_name">Forwarder</string>
     <string name="notification_forwarding_title">SMS қайта бағыттау белсенді</string>
     <string name="notification_forwarding_content">Жіберілген хаттар: %1$d</string>
+    <string name="section_open_source">Ашық бастапқы код</string>
+    <string name="open_source_description">Жобаның бастапқы коды GitHub-та Apache 2.0 лицензиясымен қолжетімді.</string>
+    <string name="open_source_link_text">GitHub жобасы</string>
 </resources>

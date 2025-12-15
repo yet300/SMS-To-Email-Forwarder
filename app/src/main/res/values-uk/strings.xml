@@ -50,4 +50,7 @@
     <string name="notification_channel_name">Forwarder</string>
     <string name="notification_forwarding_title">Пересилання SMS активне</string>
     <string name="notification_forwarding_content">Відправлено листів: %1$d</string>
+    <string name="section_open_source">Відкритий вихідний код</string>
+    <string name="open_source_description">Вихідний код проекту доступний на GitHub за ліцензією Apache 2.0.</string>
+    <string name="open_source_link_text">GitHub проект</string>
 </resources>

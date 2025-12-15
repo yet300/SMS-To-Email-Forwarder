@@ -39,6 +39,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalClipboardManager
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.input.ImeAction
@@ -150,6 +151,10 @@ fun ForwarderScreen(
                     onStopMonitoring = onStopMonitoring,
                     hasSmsPermission = hasSmsPermission,
                 )
+            }
+
+            item {
+                OpenSourceSection()
             }
 
             item {
@@ -308,6 +313,28 @@ private fun ThirdPartyWarningSection() {
                 color = MaterialTheme.colorScheme.onError,
                 style = MaterialTheme.typography.bodyMedium
             )
+        }
+    }
+}
+
+@Composable
+private fun OpenSourceSection() {
+    val uriHandler = LocalUriHandler.current
+    SectionCard(titleRes = R.string.section_open_source) {
+        val description = stringResource(id = R.string.open_source_description)
+        val linkText = stringResource(id = R.string.open_source_link_text)
+        Text(
+            text = description,
+            style = MaterialTheme.typography.bodyMedium
+        )
+
+        Button(
+            onClick = {
+                uriHandler.openUri("https://github.com/yet300/SMS-To-Email-Forwarder")
+            },
+            modifier = Modifier.fillMaxWidth(),
+        ) {
+            Text(text = linkText)
         }
     }
 }

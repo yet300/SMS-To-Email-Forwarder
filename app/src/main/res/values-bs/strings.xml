@@ -50,4 +50,7 @@
     <string name="notification_channel_name">Forwarder</string>
     <string name="notification_forwarding_title">Prosljeđivanje SMS-a aktivno</string>
     <string name="notification_forwarding_content">Poslano emailova: %1$d</string>
+    <string name="section_open_source">Otvoreni kod</string>
+    <string name="open_source_description">Izvorni kod projekta dostupan je na GitHubu pod licencom Apache 2.0.</string>
+    <string name="open_source_link_text">GitHub projekt</string>
 </resources>

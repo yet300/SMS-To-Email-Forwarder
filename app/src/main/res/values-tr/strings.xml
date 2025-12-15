@@ -50,4 +50,7 @@
     <string name="notification_channel_name">Yönlendirici</string>
     <string name="notification_forwarding_title">SMS yönlendirme aktif</string>
     <string name="notification_forwarding_content">Gönderilen e-postalar: %1$d</string>
+    <string name="section_open_source">Açık Kaynak</string>
+    <string name="open_source_description">Projenin kaynak kodu Apache 2.0 Lisansı ile GitHub\'da mevcuttur.</string>
+    <string name="open_source_link_text">GitHub projesi</string>
 </resources>

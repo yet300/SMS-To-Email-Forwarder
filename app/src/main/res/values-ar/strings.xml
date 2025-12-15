@@ -50,4 +50,7 @@
     <string name="notification_channel_name">المحول (Forwarder)</string>
     <string name="notification_forwarding_title">إعادة توجيه SMS نشطة</string>
     <string name="notification_forwarding_content">رسائل البريد المرسلة: %1$d</string>
+    <string name="section_open_source">مفتوح المصدر</string>
+    <string name="open_source_description">الكود المصدري للمشروع متاح على GitHub بموجب ترخيص Apache 2.0.</string>
+    <string name="open_source_link_text">مشروع GitHub</string>
 </resources>

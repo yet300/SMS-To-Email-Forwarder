@@ -50,4 +50,7 @@
     <string name="notification_channel_name">Forwarder</string>
     <string name="notification_forwarding_title">SMS अग्रेषण सक्रिय है</string>
     <string name="notification_forwarding_content">भेजे गए ईमेल: %1$d</string>
+    <string name="section_open_source">ओपन सोर्स</string>
+    <string name="open_source_description">प्रोजेक्ट का सोर्स कोड Apache 2.0 लाइसेंस के साथ GitHub पर उपलब्ध है।</string>
+    <string name="open_source_link_text">GitHub प्रोजेक्ट</string>
 </resources>

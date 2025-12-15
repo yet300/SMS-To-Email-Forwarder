@@ -50,4 +50,7 @@
     <string name="notification_channel_name">Yönləndirici</string>
     <string name="notification_forwarding_title">SMS yönləndirmə aktivdir</string>
     <string name="notification_forwarding_content">Göndərilən məktublar: %1$d</string>
+    <string name="section_open_source">Açıq mənbə</string>
+    <string name="open_source_description">Layihənin mənbə kodu Apache 2.0 Lisenziyası ilə GitHub-da mövcuddur.</string>
+    <string name="open_source_link_text">GitHub layihəsi</string>
 </resources>

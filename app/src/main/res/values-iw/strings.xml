@@ -50,4 +50,7 @@
     <string name="notification_channel_name">Forwarder</string>
     <string name="notification_forwarding_title">העברת SMS פעילה</string>
     <string name="notification_forwarding_content">מיילים שנשלחו: %1$d</string>
+    <string name="section_open_source">קוד פתוח</string>
+    <string name="open_source_description">קוד המקור של הפרויקט זמין ב-GitHub תחת רישיון Apache 2.0.</string>
+    <string name="open_source_link_text">פרויקט GitHub</string>
 </resources>

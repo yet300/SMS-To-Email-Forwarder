@@ -50,4 +50,7 @@
     <string name="notification_channel_name">Továbbító</string>
     <string name="notification_forwarding_title">SMS továbbítás aktív</string>
     <string name="notification_forwarding_content">Elküldött levelek: %1$d</string>
+    <string name="section_open_source">Nyílt forráskód</string>
+    <string name="open_source_description">A projekt forráskódja elérhető a GitHubon Apache 2.0 licenccel.</string>
+    <string name="open_source_link_text">GitHub projekt</string>
 </resources>
