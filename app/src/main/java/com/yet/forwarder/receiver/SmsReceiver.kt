@@ -17,13 +17,14 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import org.koin.java.KoinJavaComponent.get
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-class SmsReceiver @Inject constructor(
-    private val settingsStore: SettingsStore,
-    private val emailSender: EmailSender
+class SmsReceiver @JvmOverloads  @Inject constructor(
+    private val settingsStore: SettingsStore = get(SettingsStore::class.java),
+    private val emailSender: EmailSender = get(EmailSender::class.java)
 ) : BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent) {
