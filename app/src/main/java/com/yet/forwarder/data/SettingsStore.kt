@@ -15,12 +15,10 @@ import java.io.IOException
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
-import org.koin.core.annotation.Single
 
 val Context.forwarderDataStore: DataStore<Preferences> by preferencesDataStore(name = "forwarder_settings")
 
 @Singleton
-@Single
 class SettingsStore @Inject constructor(private val context: Context) {
 
     private val dataStore = context.forwarderDataStore
