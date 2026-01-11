@@ -12,20 +12,21 @@ import com.yet.forwarder.R
 import com.yet.forwarder.data.ForwarderSettings
 import com.yet.forwarder.data.SettingsStore
 import com.yet.forwarder.email.EmailSender
-import jakarta.inject.Inject
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
-import org.koin.java.KoinJavaComponent.get
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+import kotlin.getValue
 
-class SmsReceiver @JvmOverloads  @Inject constructor(
-    private val settingsStore: SettingsStore = get(SettingsStore::class.java),
-    private val emailSender: EmailSender = get(EmailSender::class.java)
-) : BroadcastReceiver() {
+class SmsReceiver : BroadcastReceiver(), KoinComponent {
+
+    val settingsStore: SettingsStore by inject()
+    val emailSender: EmailSender by inject()
 
     override fun onReceive(context: Context, intent: Intent) {
         if (intent.action != Telephony.Sms.Intents.SMS_RECEIVED_ACTION) return
