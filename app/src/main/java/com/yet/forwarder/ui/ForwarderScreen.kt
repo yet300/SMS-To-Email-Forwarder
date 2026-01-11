@@ -20,10 +20,11 @@ import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.filled.Stop
 import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.AssistChip
-import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ElevatedButton
+import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
@@ -328,7 +329,7 @@ private fun OpenSourceSection() {
             style = MaterialTheme.typography.bodyMedium
         )
 
-        Button(
+        FilledTonalButton(
             onClick = {
                 uriHandler.openUri("https://github.com/yet300/SMS-To-Email-Forwarder")
             },
@@ -377,14 +378,15 @@ private fun ActionsSection(
             val isMonitoring = state.monitoringEnabled
             val canInteract = !state.isSaving && !state.isSendingTest
 
-            Button(
+            ElevatedButton(
                 onClick = {
                     if (isMonitoring) onStopMonitoring()
                     else onStartMonitoring()
                 },
                 enabled = canInteract,
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = if (isMonitoring) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.primary
+                colors = ButtonDefaults.elevatedButtonColors(
+                    containerColor = if (isMonitoring) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.primary,
+                    contentColor = if (isMonitoring) MaterialTheme.colorScheme.onError else MaterialTheme.colorScheme.onPrimary
                 ),
                 modifier = Modifier.weight(1f)
             ) {

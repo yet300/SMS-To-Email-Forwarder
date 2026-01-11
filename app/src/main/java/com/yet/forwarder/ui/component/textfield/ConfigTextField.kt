@@ -18,6 +18,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.material3.MaterialTheme
 
 @Composable
 fun ConfigTextField(
@@ -35,10 +36,12 @@ fun ConfigTextField(
     OutlinedTextField(
         value = value,
         onValueChange = onValueChange,
-        label = { Text(stringResource(labelRes)) },
+        label = { Text(stringResource(labelRes), style = MaterialTheme.typography.labelLarge) },
         singleLine = singleLine,
         leadingIcon = { Icon(leadingIcon, contentDescription = null) },
         modifier = Modifier.fillMaxWidth(),
+        textStyle = MaterialTheme.typography.bodyLarge,
+        shape = MaterialTheme.shapes.extraLarge,
         keyboardOptions = KeyboardOptions(
             keyboardType = keyboardType,
             imeAction = imeAction
