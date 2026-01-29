@@ -86,17 +86,24 @@ class EmailSender {
             put("mail.smtp.timeout", IO_TIMEOUT_MS.toString())
             put("mail.smtp.writetimeout", IO_TIMEOUT_MS.toString())
 
-            if (settings.useStartTls) {
-                put("mail.smtp.starttls.enable", "true")
-            }
             if (settings.requireAuth) {
                 put("mail.smtp.auth", "true")
             }
+
+            // Configure SSL/TLS encryption
+            // Note: Direct SSL and STARTTLS are mutually exclusive at protocol level
+            // If both are enabled, SSL takes priority (port 465 behavior)
             if (settings.useSsl) {
+                // Direct SSL/TLS from start (typically port 465)
                 put("mail.smtp.socketFactory.port", settings.port.toString())
                 put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory")
                 put("mail.smtp.ssl.enable", "true")
+            } else if (settings.useStartTls) {
+                // STARTTLS: start plain, then upgrade to TLS (typically port 587)
+                put("mail.smtp.starttls.enable", "true")
+                put("mail.smtp.starttls.required", "true")
             }
+
             if (settings.trustAllCertificates) {
                 put("mail.smtp.ssl.trust", "*")
             }
